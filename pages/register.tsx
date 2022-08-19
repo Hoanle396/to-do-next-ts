@@ -1,5 +1,5 @@
-import { HowToReg } from '@mui/icons-material'
-import { Button, TextField, Link } from '@mui/material'
+import { AlternateEmail, HowToReg, InsertInvitation, Lock, Person } from '@mui/icons-material'
+import { Button, TextField, Link, InputAdornment } from '@mui/material'
 import { Container } from '@mui/system'
 import { NextPage } from 'next'
 import NextLink from 'next/link'
@@ -8,7 +8,7 @@ import { useMutation } from 'react-query'
 import { User } from '../api/User'
 import styles from '../scss/auth.module.scss'
 import { toastEmit } from '../utils/toatify'
-const Register:NextPage = () => {
+const Register: NextPage = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [name, setName] = useState('');
@@ -40,29 +40,104 @@ const Register:NextPage = () => {
             <h1 className={styles.title}>Register page</h1>
             <div className={styles.form}>
                <span>Email</span>
-               <TextField type='email' color='primary' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} size='small' variant="outlined" fullWidth></TextField>
+               <TextField
+                  InputProps={{
+                     startAdornment: (
+                        <InputAdornment position="start">
+                           <AlternateEmail />
+                        </InputAdornment>
+                     ),
+                  }}
+                  type='email'
+                  color='primary'
+                  placeholder='Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  size='small'
+                  variant="outlined"
+                  fullWidth
+               ></TextField>
             </div>
             <div className={styles.form}>
                <span>Name</span>
-               <TextField type='text' color='primary' placeholder='Full Name' value={name} onChange={(e) => setName(e.target.value)} size='small' variant="outlined" fullWidth></TextField>
+               <TextField InputProps={{
+                  startAdornment: (
+                     <InputAdornment position="start">
+                        <Person />
+                     </InputAdornment>
+                  ),
+               }}
+                  type='text'
+                  color='primary'
+                  placeholder='Full Name'
+                  value={name} onChange={(e) => setName(e.target.value)}
+                  size='small'
+                  variant="outlined"
+                  fullWidth
+               ></TextField>
             </div>
             <div className={styles.form}>
                <span>Age</span>
-               <TextField type='number' color='primary' placeholder='Age' value={age} onChange={(e) => setAge(e.target.value)} size='small' variant="outlined" fullWidth></TextField>
+               <TextField InputProps={{
+                  startAdornment: (
+                     <InputAdornment position="start">
+                        <InsertInvitation />
+                     </InputAdornment>
+                  ),
+               }}
+                  type='number'
+                  color='primary'
+                  placeholder='Age'
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  size='small'
+                  variant="outlined"
+                  fullWidth
+               ></TextField>
             </div>
             <div className={styles.form}>
                <span>Password</span>
-               <TextField type='password' color='primary' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' size='small' variant="outlined" fullWidth></TextField>
+               <TextField InputProps={{
+                  startAdornment: (
+                     <InputAdornment position="start">
+                        <Lock />
+                     </InputAdornment>
+                  ),
+               }}
+                  type='password'
+                  color='primary'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder='Password'
+                  size='small'
+                  variant="outlined"
+                  fullWidth
+               ></TextField>
             </div>
             <div className={styles.form}>
                <span>Password comfrim</span>
-               <TextField type='password' color='primary' value={passwordComfrim} onChange={(e) => setPasswordComfrim(e.target.value)} placeholder='Password' size='small' variant="outlined" fullWidth></TextField>
+               <TextField InputProps={{
+                  startAdornment: (
+                     <InputAdornment position="start">
+                        <Lock />
+                     </InputAdornment>
+                  ),
+               }}
+                  type='password'
+                  color='primary'
+                  value={passwordComfrim}
+                  onChange={(e) => setPasswordComfrim(e.target.value)}
+                  placeholder='Password'
+                  size='small'
+                  variant="outlined"
+                  fullWidth
+               ></TextField>
             </div>
-            <NextLink href={'/login'} passHref style={{marginTop:'1.5rem'}}>
+            <NextLink href={'/login'} passHref style={{ marginTop: '1.5rem' }}>
                <Link>Have account? Login</Link>
             </NextLink>
             <div className={styles.form}>
-               <Button color='primary' variant='contained' onClick={handleSumit} startIcon={<HowToReg />}>{useRegisterQuery.isLoading ? "load.." : null} Register</Button>
+               <Button color='primary' variant='contained' onClick={handleSumit} startIcon={<HowToReg />}>{useRegisterQuery.isLoading ? "..." : null} Register</Button>
             </div>
          </div>
       </Container>
