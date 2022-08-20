@@ -58,26 +58,30 @@ const Task: NextPage = () => {
    const handleUpdateTask = (payload: UpdateTaskDto) => updateTask.mutate(payload);
    const handleDelete = (id: string) => deleteTask.mutate(id);
    useEffect(() => {
-      if (addtask.isSuccess) {
-         toastEmit({ type: 'success', message: "Add to do successfuly" })
-      }
-      if (addtask.isError) {
-         toastEmit({ type: 'error', message: "Add to do failed" })
-      }
       if (updateTask.isSuccess) {
          toastEmit({ type: 'success', message: "Update to do successfuly" })
       }
       if (updateTask.isError) {
          toastEmit({ type: 'error', message: "Update to do failed" })
       }
+   },[updateTask.isLoading])
+   useEffect(() => {
+      if (addtask.isSuccess) {
+         toastEmit({ type: 'success', message: "Add to do successfuly" })
+      }
+      if (addtask.isError) {
+         toastEmit({ type: 'error', message: "Add to do failed" })
+      }
+
+   }, [addtask.isLoading])
+   useEffect(() => {
       if (deleteTask.isSuccess) {
          toastEmit({ type: 'success', message: "Delete to do successfuly" })
       }
       if (deleteTask.isError) {
          toastEmit({ type: 'error', message: "Delete to do failed" })
       }
-   }, [addtask.isLoading,deleteTask.isLoading,updateTask.isLoading])
-
+   },[deleteTask.isLoading])
    return (
       <BaseLayout>
          <Container className={style.container}>

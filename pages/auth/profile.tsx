@@ -45,20 +45,15 @@ const Profile = () => {
       setImage(`https://api-nodejs-todolist.herokuapp.com/user/${checkauth.data.data._id}/avatar`)
     }
   }, [checkauth.isLoading])
- 
   useEffect(() => {
-    if (useUpdate.isError) {
-      toastEmit({ type: 'error', message: 'Update Failed' })
-    }
-    if (useUpdate.isSuccess) {
-      toastEmit({ type: 'success', message: 'Update successfuly' })
-    }
     if (useUploadImg.isError) {
       toastEmit({ type: 'error', message: 'Upload Failed' })
     }
     if (useUploadImg.isSuccess) {
       toastEmit({ type: 'success', message: 'Upload successfuly' })
     }
+  }, [useUploadImg.isLoading]);
+  useEffect(() => {
     if (useDeleteImg.isError) {
       toastEmit({ type: 'error', message: 'Delete Image Failed' })
     }
@@ -66,6 +61,8 @@ const Profile = () => {
       setImage('')
       toastEmit({ type: 'success', message: 'Delete Image successfuly' })
     }
+  }, [useDeleteImg.isLoading])
+  useEffect(() => {
     if (useDeleteUser.isError) {
       toastEmit({ type: 'error', message: 'Delete account Failed' })
     }
@@ -73,7 +70,15 @@ const Profile = () => {
       toastEmit({ type: 'success', message: 'Delete account successfuly' })
       router.push('/login')
     }
-  }, [useUpdate.isLoading,useUploadImg.isLoading,useDeleteImg.isLoading,useDeleteUser.isLoading])
+  },[useDeleteUser.isLoading])
+  useEffect(() => {
+    if (useUpdate.isError) {
+      toastEmit({ type: 'error', message: 'Update Failed' })
+    }
+    if (useUpdate.isSuccess) {
+      toastEmit({ type: 'success', message: 'Update successfuly' })
+    }
+  }, [useUpdate.isLoading])
   if (checkauth.isLoading) {
     return 'Loading Check auth..'
   }
