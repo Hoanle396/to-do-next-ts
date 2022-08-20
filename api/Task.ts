@@ -1,6 +1,9 @@
 import baseAxios from "../config/baseAxios"
-
-export const Task = {
+export interface UpdateTaskDto{
+   id: string;
+   completed: boolean;
+}
+export const TaskApi = {
    Addtask: (payload: any) => {
       return baseAxios.post('/task',payload)
    },
@@ -16,8 +19,9 @@ export const Task = {
    TaskPaginate: (limit: number, skip: number) => {
       return baseAxios.get(`task?limit=${limit}&skip=${skip}`)
    },
-   UpdateById: (id: string,payload:any) => {
-      return baseAxios.put(`/task/${id}`,payload)
+
+   UpdateById: (dto:UpdateTaskDto) => {
+      return baseAxios.put(`/task/${dto.id}`,{completed:dto.completed})
    },
    DeleteTask: (id: string) => {
       return baseAxios.delete(`/task/${id}`)

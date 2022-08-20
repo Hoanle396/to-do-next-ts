@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useToken } from "./hooks/useToken";
 
 export default function middleware(req: NextRequest) {
-  const protectedUrl: string[] = ["/auth", "/dashboard"];
+  const protectedUrl: string[] = ["/auth", "/task"];
   const urlNext = req.url;
   if (findValue(protectedUrl, urlNext)) {
     if (!req.cookies.get("token")) {
