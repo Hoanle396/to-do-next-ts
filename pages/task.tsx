@@ -130,7 +130,7 @@ const Task: NextPage = () => {
                      <TabPanel value={value} index={0}>
                         {taskPaginate.isLoading && <>...Loading Data</>}
                         {taskPaginate.isError && <>...Error Loading Data</>}
-                        {taskPaginate.data && taskPaginate.data.data.data.map((item: any) => <TaskComponets data={item} onUpdateTask={handleUpdateTask} onDelete={handleDelete} />)}
+                        {taskPaginate.data && taskPaginate.data.data.data.map((item: any,index:number) => <TaskComponets key={item._id} data={item} onUpdateTask={handleUpdateTask} onDelete={handleDelete} />)}
                         <div style={{ position: 'absolute', top:450, right:200 }}>
                         <button
                            onClick={() => setSkip(skip => skip - 3)}
@@ -147,7 +147,7 @@ const Task: NextPage = () => {
                      <TabPanel value={value} index={1}>
                         {compelete.isLoading && <>...Loading Data</>}
                         {compelete.isError && <>...Error Loading Data</>}
-                        {compelete.data && compelete.data.data.data.map((item: any) => <TaskComponets data={item} onUpdateTask={()=>{}} onDelete={handleDelete}/>)}
+                        {compelete.data && compelete.data.data.data.map((item: any) => <TaskComponets key={item._id} data={item} onUpdateTask={()=>{}} onDelete={handleDelete}/>)}
                      </TabPanel>
                   </div>
                </div>
