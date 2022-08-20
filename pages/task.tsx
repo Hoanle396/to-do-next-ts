@@ -45,8 +45,18 @@ const Task: NextPage = () => {
    const [skip, setSkip] = useState(0);
    const [value, setValue] = React.useState(0);
 
-   const addtask = useMutation((payload: any) => TaskApi.Addtask(payload));
    const alltask=useQuery('query-all-task',() =>TaskApi.AllTask());
+   const addtask = useMutation((payload: any) => TaskApi.Addtask(payload), {
+      onSuccess: () => {
+         toastEmit({ type: 'success', message: "Add to do successfuly" })
+         taskPaginate.refetch();
+         compelete.refetch();
+      },
+      onError: () => {
+         toastEmit({ type: 'error', message: "Add to do failed" })
+      },
+
+   });
    const updateTask = useMutation((payload: UpdateTaskDto) => TaskApi.UpdateById(payload));
    const deleteTask=useMutation((id: string) => TaskApi.DeleteTask(id));
    const compelete = useQuery('query-complete', () => TaskApi.TaskComplete())
@@ -60,23 +70,18 @@ const Task: NextPage = () => {
    useEffect(() => {
       if (updateTask.isSuccess) {
          toastEmit({ type: 'success', message: "Update to do successfuly" })
+         taskPaginate.refetch();
+         compelete.refetch();
       }
       if (updateTask.isError) {
          toastEmit({ type: 'error', message: "Update to do failed" })
       }
    },[updateTask.isLoading])
    useEffect(() => {
-      if (addtask.isSuccess) {
-         toastEmit({ type: 'success', message: "Add to do successfuly" })
-      }
-      if (addtask.isError) {
-         toastEmit({ type: 'error', message: "Add to do failed" })
-      }
-
-   }, [addtask.isLoading])
-   useEffect(() => {
       if (deleteTask.isSuccess) {
          toastEmit({ type: 'success', message: "Delete to do successfuly" })
+         taskPaginate.refetch();
+         compelete.refetch();
       }
       if (deleteTask.isError) {
          toastEmit({ type: 'error', message: "Delete to do failed" })
