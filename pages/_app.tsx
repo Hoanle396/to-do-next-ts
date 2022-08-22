@@ -4,6 +4,7 @@ import { store } from "../store";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import '../scss/home.styles.scss'
 import NavBar from "../components/Navbar";
 import AuthProvider from "../hooks/AuthContext";
 function MyApp({ Component, pageProps }: AppProps) {

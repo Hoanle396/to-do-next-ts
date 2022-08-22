@@ -29,17 +29,20 @@ const NavBar = () => {
       }
    }, [logout.isError, logout.isSuccess])
    return (
-      <div className={style.topnav}>
-         <Link href="/">Home</Link>
-         {auth.isLogin ?
-            <>
-               <Link href="/task">Task</Link>
-               <Link href="/auth/profile">Profile</Link>
-            </> : null}
-         {auth.isLogin ?
-            <a onClick={handleClick}>logout</a> :
-            <Link href="/login">login</Link>}
-      </div>
+      <nav className={style.nav}>
+         <h2 className={style.h2}>TECH STACK </h2>
+         <ul className={style.ul}>
+            <li><Link href="/">Home</Link></li>
+            {auth.isLogin ?
+               <>
+                  <li><Link href="/task">Stack</Link></li>
+                  <li><Link href="/auth/profile">Profile</Link></li>
+               </> : null}
+            {auth.isLogin ?
+               <li><a onClick={handleClick}>logout</a></li> :
+               <li><Link href="/login">login</Link></li>}
+         </ul>
+      </nav>
    )
 }
 

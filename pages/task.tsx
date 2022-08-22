@@ -104,12 +104,12 @@ const Task: NextPage = () => {
                      onChange={handleChange}
                      sx={{ borderRight: 1, borderColor: 'divider' }}
                   >
-                     <Tab label="All Task" {...a11yProps(0)} />
-                     <Tab label="Compelete Task" {...a11yProps(1)} />
+                     <Tab label="All Stack" {...a11yProps(0)} />
+                     <Tab label="Compelete Stack" {...a11yProps(1)} />
                   </Tabs>
                </div>
                <div className={style.right}>
-                  <h1 className={style.text_h1}>Todo Task</h1>
+                  <h1 className={style.text_h1}>Tech Stack</h1>
                   <TextField
                      InputProps={{
                         endAdornment: (

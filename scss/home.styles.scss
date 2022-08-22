@@ -1,0 +1,101 @@
+
+#banner-index {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 150px;
+   
+   & ul {
+     display: flex;
+     list-style: none;
+ 
+     & li {
+       font-size: 80px;
+       font-weight: bolder;
+       color: #f5f5f5;
+       text-shadow: #fff 0.006em 0.006em 0.007em,
+         #9c9c9c 1px 1px 1px,
+         #9c9c9c 1px 2px 1px,
+         #9c9c9c 1px 3px 1px,
+         #9c9c9c 1px 4px 1px,
+         #9c9c9c 1px 5px 1px,
+         #9c9c9c 1px 6px 1px,
+         #9c9c9c 1px 7px 1px,
+         #9c9c9c 1px 8px 1px,
+         #9c9c9c 1px 9px 1px,
+         #9c9c9c 1px 10px 1px,
+         #9c9c9c 1px 11px 1px,
+         #9c9c9c 1px 12px 1px,
+         rgba(16, 16, 16, 0.4) 1px 18px 6px,
+         rgba(16, 16, 16, 0.4) 1px 22px 10px,
+         rgba(16, 16, 16, 0.4) 1px 26px 35px,
+         rgba(16, 16, 16, 0.4) 1px 30px 66px,
+         #fff -0.5em -0.1em 100px;
+       animation: anilogo 3.6s infinite ease-in-out;
+       $colors: (1: #FF1818, 2: #DC3545, 3: #C73B58, 4:#9F467C, 5:#7B509C, 6:#6357B1, 7:#4A5DC6, 8:#3862D7,9:#5694ff);
+ 
+       @each $i ,
+       $color in $colors {
+         &:nth-child(#{$i}) {
+           color: $color;
+           animation-delay: calc(.4s*$i);
+         }
+       }
+ 
+     }
+   }
+ }
+ 
+ 
+ @keyframes anilogo {
+ 
+   0%,
+   100% {
+     margin-top: 0;
+     text-shadow: #fff 0.006em 0.006em 0.007em,
+       #9c9c9c 1px 1px 1px,
+       #9c9c9c 1px 2px 1px,
+       #9c9c9c 1px 3px 1px,
+       #9c9c9c 1px 4px 1px,
+       #9c9c9c 1px 5px 1px,
+       #9c9c9c 1px 6px 1px,
+       #9c9c9c 1px 7px 1px,
+       #9c9c9c 1px 8px 1px,
+       #9c9c9c 1px 9px 1px,
+       #9c9c9c 1px 10px 1px,
+       #9c9c9c 1px 11px 1px,
+       #9c9c9c 1px 12px 1px,
+       rgba(16, 16, 16, 0.4) 1px 18px 6px,
+       rgba(16, 16, 16, 0.4) 1px 22px 10px,
+       rgba(16, 16, 16, 0.4) 1px 26px 35px,
+       rgba(16, 16, 16, 0.4) 1px 30px 66px,
+       #fff -0.5em -0.1em 100px;
+   }
+ 
+   50% {
+     margin-top: -20px;
+     text-shadow: #fff 0.006em 0.006em 0.007em,
+       #9c9c9c 1px 1px 1px,
+       #9c9c9c 1px 2px 1px,
+       #9c9c9c 1px 3px 1px,
+       #9c9c9c 1px 4px 1px,
+       #9c9c9c 1px 5px 1px,
+       #9c9c9c 1px 6px 1px,
+       #9c9c9c 1px 7px 1px,
+       #9c9c9c 1px 8px 1px,
+       #9c9c9c 1px 9px 1px,
+       #9c9c9c 1px 10px 1px,
+       #9c9c9c 1px 11px 1px,
+       #9c9c9c 1px 12px 1px,
+       rgba(16, 16, 16, 0.4) 1px 38px 26px,
+       rgba(16, 16, 16, 0.4) 1px 42px 30px,
+       rgba(16, 16, 16, 0.4) 1px 46px 65px,
+       rgba(16, 16, 16, 0.4) 1px 50px 95px,
+       #fff -0.5em -0.1em 100px;
+   }
+ }
+ p{
+   font-size:24px;
+   font-weight: 500;
+   font-style: italic;
+ }
