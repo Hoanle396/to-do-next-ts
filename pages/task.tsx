@@ -81,18 +81,18 @@ const Task: NextPage = () => {
          alltask.refetch();
       }
       if (updateTask.isError) {
-         toastEmit({ type: 'error', message: "Update to do failed" })
+         toastEmit({ type: "error", message: "Update to do failed" })
       }
    },[updateTask.isLoading])
    useEffect(() => {
       if (deleteTask.isSuccess) {
-         toastEmit({ type: 'success', message: "Delete to do successfuly" })
+         toastEmit({ type: "success", message: "Delete to do successfuly" })
          taskPaginate.refetch();
          compelete.refetch();
          alltask.refetch();
       }
       if (deleteTask.isError) {
-         toastEmit({ type: 'error', message: "Delete to do failed" })
+         toastEmit({ type: "error", message: "Delete to do failed" })
       }
    },[deleteTask.isLoading])
    return (

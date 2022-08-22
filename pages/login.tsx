@@ -11,16 +11,28 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setAuthInfor, setIsLogin } from '../features/AuthSlice'
-import { NextPage } from 'next'
 import { useToken } from '../hooks/useToken'
 import Loading from '../components/Loading'
 
-const Login: NextPage = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
-  const useLoginQuery = useMutation((payload: any) => User.Login(payload));
+  const useLoginQuery = useMutation((payload: any) => User.Login(payload), {
+    onSuccess: (data) => {
+      const { user, token } = data.data
+      Cookies.set('token', token)
+      useToken(token)
+      dispatch(setIsLogin(true))
+      dispatch(setAuthInfor({ name: user.name, email: user.email, age: user.age, id: user._id }))
+      toastEmit({ type: 'success', message: "Đăng nhập tài khoản thành công !" })
+      router.push('/')
+    },
+    onError: () => {
+      toastEmit({ type: 'error', message: "Sai tài khoản hoặc mật khẩu" })
+    }
+  });
   const handleSumit = () => {
     if (email == '' || password == '') {
       toastEmit({ type: 'error', message: 'Không được để trống' })
@@ -29,20 +41,7 @@ const Login: NextPage = () => {
       useLoginQuery.mutate({ email, password })
     }
   }
-  useEffect(() => {
-    if (useLoginQuery.isError) {
-      toastEmit({ type: 'error', message: "Sai tài khoản hoặc mật khẩu" })
-    }
-    if (useLoginQuery.isSuccess) {
-      const { user, token } = useLoginQuery.data.data
-      Cookies.set('token', token)
-      useToken(token)
-      dispatch(setIsLogin(true))
-      dispatch(setAuthInfor({ name: user.name, email: user.email, age: user.age, id: user._id }))
-      toastEmit({ type: 'success', message: "Đăng nhập tài khoản thành công !" })
-      router.push('/')
-    }
-  }, [useLoginQuery.isError, useLoginQuery.isSuccess])
+
   return (
     <Container>
       <div className={styles.container}>
@@ -87,8 +86,8 @@ const Login: NextPage = () => {
             fullWidth
           ></TextField>
         </div>
-        <NextLink href={'/register'} passHref style={{ marginTop: '1.5rem' }}>
-          <Link>Don't Have account? Register</Link>
+        <NextLink href={'/register'} passHref style={{ marginTop: "1.5rem" }}>
+          <Link><span>Don't Have account? Register</span></Link>
         </NextLink>
         <div className={styles.form}>
           <Button
