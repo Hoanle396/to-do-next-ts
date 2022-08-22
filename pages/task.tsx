@@ -45,12 +45,13 @@ const Task: NextPage = () => {
    const [skip, setSkip] = useState(0);
    const [value, setValue] = React.useState(0);
 
-   const alltask=useQuery('query-all-task',() =>TaskApi.AllTask());
+   const alltask=useQuery('query-all-task',() =>TaskApi.AllTask(),{keepPreviousData:true});
    const addtask = useMutation((payload: any) => TaskApi.Addtask(payload), {
       onSuccess: () => {
          toastEmit({ type: 'success', message: "Add to do successfuly" })
          taskPaginate.refetch();
          compelete.refetch();
+         alltask.refetch();
       },
       onError: () => {
          toastEmit({ type: 'error', message: "Add to do failed" })
@@ -72,6 +73,7 @@ const Task: NextPage = () => {
          toastEmit({ type: 'success', message: "Update to do successfuly" })
          taskPaginate.refetch();
          compelete.refetch();
+         alltask.refetch();
       }
       if (updateTask.isError) {
          toastEmit({ type: 'error', message: "Update to do failed" })
@@ -82,6 +84,7 @@ const Task: NextPage = () => {
          toastEmit({ type: 'success', message: "Delete to do successfuly" })
          taskPaginate.refetch();
          compelete.refetch();
+         alltask.refetch();
       }
       if (deleteTask.isError) {
          toastEmit({ type: 'error', message: "Delete to do failed" })

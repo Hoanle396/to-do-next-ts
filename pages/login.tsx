@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setAuthInfor, setIsLogin } from '../features/AuthSlice'
 import { NextPage } from 'next'
+import { useToken } from '../hooks/useToken'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ const Login: NextPage = () => {
     if (useLoginQuery.isSuccess) {
       const { user, token } = useLoginQuery.data.data
       Cookies.set('token', token)
+      useToken(token)
       dispatch(setIsLogin(true))
       dispatch(setAuthInfor({ name: user.name, email: user.email, age: user.age, id: user._id }))
       toastEmit({ type: 'success', message: "Đăng nhập tài khoản thành công !" })
