@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux'
 import { setAuthInfor, setIsLogin } from '../features/AuthSlice'
 import { NextPage } from 'next'
 import { useToken } from '../hooks/useToken'
+import Loading from '../components/Loading'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -98,6 +99,7 @@ const Login: NextPage = () => {
           >{useLoginQuery.isLoading ? "..." : null}Login</Button>
         </div>
       </div>
+      {useLoginQuery.isLoading?<Loading/>:null}
     </Container>
   )
 }

@@ -9,6 +9,7 @@ import { User } from '../../api/User'
 import { setIsLogin } from '../../features/AuthSlice'
 import styles from '../../scss/auth.module.scss'
 import { toastEmit } from '../../utils/toatify'
+import Loading from '../../components/Loading'
 const Profile = () => {
   const [image, setImage] = useState('');
   const [img, setImg] = useState<Blob | string>('');
@@ -80,7 +81,7 @@ const Profile = () => {
     }
   }, [useUpdate.isLoading])
   if (checkauth.isLoading) {
-    return 'Loading Check auth..'
+    return <Loading/>
   }
   if (checkauth.isError) {
     router.push('/login')

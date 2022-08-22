@@ -6,6 +6,7 @@ import NextLink from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { User } from '../api/User'
+import Loading from '../components/Loading'
 import styles from '../scss/auth.module.scss'
 import { toastEmit } from '../utils/toatify'
 const Register: NextPage = () => {
@@ -140,6 +141,7 @@ const Register: NextPage = () => {
                <Button color='primary' variant='contained' onClick={handleSumit} startIcon={<HowToReg />}>{useRegisterQuery.isLoading ? "..." : null} Register</Button>
             </div>
          </div>
+         {useRegisterQuery.isLoading?<Loading/>:null}
       </Container>
    )
 }

@@ -8,6 +8,7 @@ import { AddCircle } from '@mui/icons-material'
 import { useMutation, useQuery } from 'react-query'
 import { TaskApi, UpdateTaskDto } from '../api/Task'
 import { toastEmit } from '../utils/toatify'
+import Loading from '../components/Loading'
 interface TabPanelProps {
    children?: React.ReactNode;
    index: number;
@@ -68,6 +69,9 @@ const Task: NextPage = () => {
    const handleAddtask = () => addtask.mutate({ description: task });
    const handleUpdateTask = (payload: UpdateTaskDto) => updateTask.mutate(payload);
    const handleDelete = (id: string) => deleteTask.mutate(id);
+   const handlePagination = (_e:React.ChangeEvent<unknown>,page:number) => {
+      setSkip((page-1)*3)
+   }
    useEffect(() => {
       if (updateTask.isSuccess) {
          setTask('')
@@ -132,24 +136,16 @@ const Task: NextPage = () => {
                   </TextField>
                   <div className={style.todolist}>
                      <TabPanel value={value} index={0}>
-                        {taskPaginate.isLoading && <>...Loading Data</>}
+                        {taskPaginate.isLoading && <><Loading/></>}
                         {taskPaginate.isError && <>...Error Loading Data</>}
                         {taskPaginate.data && taskPaginate.data.data.data.map((item: any,index:number) => <TaskComponets key={item._id} data={item} onUpdateTask={handleUpdateTask} onDelete={handleDelete} />)}
-                        <div style={{ position: 'absolute', top:450, right:200 }}>
-                        <button
-                           onClick={() => setSkip(skip => skip - 3)}
-                           disabled={skip === 0}>
-                           Prev Page
-                        </button>
-                        <button
-                           onClick={() => setSkip(skip => skip + 3)}
-                           disabled={skip >= alltask.data?.data.count}>
-                           Next Page
-                        </button>
+                        <div style={{ position: 'absolute', top: 450, right: 200 }}>
+                           <Pagination count={Math.ceil(Number(alltask.data?.data.count/3))} onChange={handlePagination} variant="outlined" shape="circular" color='secondary'/>
+                       
                         </div>
                      </TabPanel>
                      <TabPanel value={value} index={1}>
-                        {compelete.isLoading && <>...Loading Data</>}
+                        {compelete.isLoading && <><Loading/></>}
                         {compelete.isError && <>...Error Loading Data</>}
                         {compelete.data && compelete.data.data.data.map((item: any) => <TaskComponets key={item._id} data={item} onUpdateTask={()=>{}} onDelete={handleDelete}/>)}
                      </TabPanel>
