@@ -61,7 +61,7 @@ const Task: NextPage = () => {
    const updateTask = useMutation((payload: UpdateTaskDto) => TaskApi.UpdateById(payload));
    const deleteTask=useMutation((id: string) => TaskApi.DeleteTask(id));
    const compelete = useQuery('query-complete', () => TaskApi.TaskComplete())
-   const taskPaginate = useQuery(['query-paginate', skip], () => TaskApi.TaskPaginate(3, skip));
+   const taskPaginate = useQuery(['query-paginate', skip], () => TaskApi.TaskPaginate(3, skip),{keepPreviousData:true});
    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
    };
@@ -70,6 +70,7 @@ const Task: NextPage = () => {
    const handleDelete = (id: string) => deleteTask.mutate(id);
    useEffect(() => {
       if (updateTask.isSuccess) {
+         setTask('')
          toastEmit({ type: 'success', message: "Update to do successfuly" })
          taskPaginate.refetch();
          compelete.refetch();
