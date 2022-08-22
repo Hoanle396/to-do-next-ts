@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
 import { useSelector } from "react-redux";
-import { useToken } from "./hooks/useToken";
 
 export default function middleware(req: NextRequest) {
   const protectedUrl: string[] = ["/auth", "/task"];

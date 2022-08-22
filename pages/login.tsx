@@ -11,7 +11,7 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setAuthInfor, setIsLogin } from '../features/AuthSlice'
-import { useToken } from '../hooks/useToken'
+import { setToken } from '../hooks/setToken'
 import Loading from '../components/Loading'
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     onSuccess: (data) => {
       const { user, token } = data.data
       Cookies.set('token', token)
-      useToken(token)
+      setToken(token)
       dispatch(setIsLogin(true))
       dispatch(setAuthInfor({ name: user.name, email: user.email, age: user.age, id: user._id }))
       toastEmit({ type: 'success', message: "Đăng nhập tài khoản thành công !" })
@@ -87,7 +87,7 @@ const Login = () => {
           ></TextField>
         </div>
         <NextLink href={'/register'} passHref style={{ marginTop: "1.5rem" }}>
-          <Link><span>Don't Have account? Register</span></Link>
+          <Link><span>Don&#39;t Have account? Register</span></Link>
         </NextLink>
         <div className={styles.form}>
           <Button
