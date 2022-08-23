@@ -1,29 +1,6 @@
-// .topnav {
-//    overflow: hidden;
-//    background-color: #04AA99;
-
-//    & a {
-//       float: left;
-//       color: #f2f2f2;
-//       text-align: center;
-//       padding: 14px 16px;
-//       text-decoration: none;
-//       font-size: 17px;
-
-//       &:hover {
-//          background-color: #ddd;
-//          color: black;
-//       }
-
-//       &.active {
-//          background-color: #04AA6D;
-//          color: white;
-//       }
-//    }
-// }
 .nav {
    width: 100%;
-   background-color: #698097;
+   background: linear-gradient(133deg, #fbfafb, #e473f8, #d400ff) !important;
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -42,22 +19,39 @@
 }
 
 .ul {
-   margin-right: 40px;
+   margin: 0;
+   padding: 0;
+   display: flex;
+
+   &:hover li a {
+      transform: scale(1.5);
+      opacity: 0.2;
+      filter: blur(5px);
+   }
 }
 
 .ul li {
    list-style: none;
-   display: inline-block;
-   margin-left: 40px;
+   margin: 0 20px;
+   transition: 0.5s;
 
    & a {
-      font-size: 19px;
+      display: block;
+      position: relative;
       text-decoration: none;
+      padding: 5px;
+      color: #fff;
+      transition: 0.5s;
+      font-size: 19px;
       text-transform: uppercase;
-      color: #eee;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
+
       &:hover {
+         transform: scale(1.3);
+         opacity: 1;
+         filter: blur(0);
+         text-decoration: none;
          color: #0d6efd;
       }
    }
