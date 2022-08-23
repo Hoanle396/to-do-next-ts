@@ -108,8 +108,8 @@ const Task: NextPage = () => {
                      onChange={handleChange}
                      sx={{ borderRight: 1, borderColor: 'divider' }}
                   >
-                     <Tab label="All Stack" {...a11yProps(0)} />
-                     <Tab label="Compelete Stack" {...a11yProps(1)} />
+                     <Tab label="All Task" {...a11yProps(0)} />
+                     <Tab label="Compelete Task" {...a11yProps(1)} />
                   </Tabs>
                </div>
                <div className={style.right}>
