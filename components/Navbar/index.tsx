@@ -35,7 +35,7 @@ const NavBar = () => {
             <li><Link href="/">Home</Link></li>
             {auth.isLogin ?
                <>
-                  <li><Link href="/task">Stack</Link></li>
+                  <li><Link href="/task">Task</Link></li>
                   <li><Link href="/auth/profile">Profile</Link></li>
                </> : null}
             {auth.isLogin ?
